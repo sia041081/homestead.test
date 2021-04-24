@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\UserModel;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AbonementController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
-        return view('home');
+        //
     }
 
     /**
@@ -23,20 +21,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-
-        $new_user = new UserModel();
-        $new_user->user_name = $request->input('user_name');
-        $new_user->telephone = $request->input('telephone');
-        $new_user->email = $request->input('inputEmail');
-        $new_user->inputPassword = $request->input('inputPassword');
-
-        $new_user->save();
-
-        if ($new_user->save()){
-            header('location: /show');
-        }
+        //
     }
 
     /**
@@ -56,11 +43,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-//        $admin = \Illuminate\Support\Facades\DB::table('user_models')->select('role')->where('email', '=', $request->input('inputEmail'))->get();
-
-        return view('show', compact('request', 'admin'));
+        //
     }
 
     /**
@@ -81,9 +66,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update()
+    public function update(Request $request, $id)
     {
-        return view('registration.registration');
+        //
     }
 
     /**

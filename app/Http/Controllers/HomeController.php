@@ -2,27 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use App\UserModel;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
+     * Display a listing of the resource.
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->middleware('auth');
+        $user = UserModel::all();
+        return view('admin.content', compact('user'));
     }
 
     /**
-     * Show the application dashboard.
+     * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function create(Request $request)
     {
-        return view('home');
+
+        $new_user = new UserModel();
+        $new_user->user_name = $request->input('user_name');
+        $new_user->telephone = $request->input('telephone');
+        $new_user->email = $request->input('inputEmail');
+        $new_user->inputPassword = $request->input('inputPassword');
+
+        $new_user->save();
+
+        if ($new_user->save()){
+            header('location: /show');
+        }
+    }
+
+    public function show()
+    {
+        return view('show');
+    }
+
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update()
+    {
+        return view('registration.registration');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\AbonementModel;
+use App\TarifModel;
 use App\UserModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -16,7 +18,9 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         $user = UserModel::all();
-       return view('admin.content', compact('user'));
+        $tarif = TarifModel::all();
+        $abonement = AbonementModel::all();
+       return view('admin.content', compact('user', 'tarif', 'abonement'));
     }
 
     /**
@@ -26,51 +30,32 @@ class AdminController extends Controller
      */
     public function create(Request $request)
     {
-
-        $new_user = new UserModel();
-        $new_user->user_name = $request->input('user_name');
-        $new_user->telephone = $request->input('telephone');
-        $new_user->email = $request->input('inputEmail');
-        $new_user->inputPassword = $request->input('inputPassword');
-
-        $new_user->save();
-
-        if ($new_user->save()){
-            header('location: /show');
-        }
+        return view('admin.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show()
     {
-        return view('show');
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function add_abonement(Request $request)
     {
-        //
+        $name = new AbonementModel();
+        $name->name_abonement =  $request->input('addAbonement');
+        $name->price = $request->input('abPrice');
+        $name->period = $request->input('addDate');
+        $name->save();
+        header('location: /admin');
+
+
+    }
+    public function add_tarif(Request $request){
+        $tarif = new TarifModel();
+        $tarif->name_tarif = $request->input('addTarif');
+        $tarif->percent = $request->input('addPercent');
+        $tarif->price = $request->input('trPrice');
+        $tarif->save();
+        header('Location: /admin');
     }
 
     /**
@@ -82,7 +67,7 @@ class AdminController extends Controller
      */
     public function update()
     {
-        return view('registration.registration');
+
     }
 
     /**

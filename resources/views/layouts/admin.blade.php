@@ -15,6 +15,8 @@
         Админка
     </h2>
     <hr>
+    <a href="{{'create'}}" class="btn btn-primary">Добавить абонемент</a>
+    <a href="{{'tarif'}}" class="btn btn-primary">Добавить тариф</a>
     @yield('content')
 </div>
 </body>

@@ -23,6 +23,12 @@ Route::post('/register', 'UserController@create')->name('register');
 
 // adminka
 Route::get('/admin', 'AdminController@index');
+Route::get('/create', 'AdminController@create')->name('create');
+Route::post('/edit_abb', 'AdminController@add_abonement');
+Route::post('/edit_tar', 'AdminController@add_tarif');
+Route::get('/tarif', function (){
+    return view('admin.add_tarif');
+})->name('tarif');
 
 
 

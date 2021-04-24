@@ -4,9 +4,6 @@
         Пользователи
     </h3>
     <hr>
-
-
-
     <table class="table">
         <thead>
         <tr>
@@ -33,5 +30,54 @@
         @endforeach
         </tbody>
     </table>
+    <hr>
+    <div class="abonement">
+    <h3 class="text-black-50">
+        Тарифы и абонементы
+    </h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Абонемент</th>
+                <th scope="col">Срок</th>
+                <th scope="col">Цена</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($abonement as $abonn)
+
+            <tr>
+                <th scope="row">{{$abonn['name_abonement']}}</th>
+                <td>{{$abonn['period']}} мес.</td>
+                <td>{{$abonn['price']}} $</td>
+            </tr>
+
+            @endforeach
+            </tbody>
+        </table>
+       <b>тарифы</b>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Тариф</th>
+                <th scope="col">Процент</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Срок</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($tarif as $tar)
+
+                <tr>
+                    <th scope="row">{{$tar['name_tarif']}}</th>
+                    <td>{{$tar['percent']}}</td>
+                    <td>{{$tar['price']}} $</td>
+                    <td>1 год</td>
+                </tr>
+
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 
 @endsection
