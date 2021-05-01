@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 @section('content')
+    @dd($user)
+    @if ($request->token = \App\Models\Users::where('role', '=', 1)->first())
     <h3 class="text-black-50">
         Пользователи
     </h3>
@@ -79,5 +81,7 @@
             </tbody>
         </table>
     </div>
-
+    @else
+        <h3>Страницу могу просматривать только пользователи с парвами администратор</h3>
+    @endif
 @endsection

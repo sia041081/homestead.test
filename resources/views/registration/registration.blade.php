@@ -9,8 +9,10 @@
                     <hr>
                     <h2>РЕГИСТРАЦИЯ</h2>
                     <hr>
-                    <form action="{{route('register')}}" method="post">
+                    <form action="{{route('user.register')}}" method="post">
                         @csrf
+                        <input type="hidden" name="token" value="{{Str::random(32)}}">
+                        <input type="hidden" name="role" value="0">
                         <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Имя">
                         <br>
                         <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="Телефон">

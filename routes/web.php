@@ -1,5 +1,9 @@
 <?php
+namespace App\Http\Controllers\Admin;
 
+
+use App\Http\Middleware\UserActions;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,21 +18,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'UserController@index');
-Route::get('/registration', 'UserController@update')->name('registration');
-Route::get('/show', 'UserController@show');
+Route::get('/', 'Admin\UserController@index');
 
-Route::post('/', 'CheckController@check')->name('login');
-Route::post('/register', 'UserController@create')->name('register');
+Route::name('user.')->group(function (){
+    Route::middleware('auth:api')->get('/show', 'Admin\Usercontroller@show')->name('show');
 
-// adminka
-Route::get('/admin', 'AdminController@index');
-Route::get('/create', 'AdminController@create')->name('create');
-Route::post('/edit_abb', 'AdminController@add_abonement');
-Route::post('/edit_tar', 'AdminController@add_tarif');
-Route::get('/tarif', function (){
-    return view('admin.add_tarif');
-})->name('tarif');
+    Route::post('/login', 'Admin\CheckController@check')->name('login');
+    Route::post('/register', 'Admin\UserController@create')->name('register');
+    Route::get('/registration', 'Admin\UserController@store')->name('registration');
+});
+Route::name('admin.')->group(function (){
+    Route::get('admin', 'Admin\AdminsController@index')->name('admin');
+});
 
 
 
